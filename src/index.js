@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Provider as AlertProvider } from 'react-alert';
+import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { BrowserRouter as Router} from 'react-router-dom';
 import store from './redux/store';
@@ -11,8 +11,10 @@ import * as serviceWorker from './serviceWorker';
 
 // Alert Options
 const alertOptions = {
+  position: positions.TOP_CENTER,
   timeout: 3000,
-  position: 'top center'
+  offset: '30px',
+  transition: transitions.SCALE
 }
 
 ReactDOM.render(
