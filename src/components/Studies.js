@@ -1,30 +1,49 @@
-import React, { Component } from 'react'
-import axios from 'axios';
+import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getStudies } from '../redux/actions/studies';
 
-export class Test extends Component {
+export class Studies extends Component {
   state = {
     studies: []
   }
 
+  static propTypes = {
+    studies: PropTypes.array.isRequired
+  }
+
   componentDidMount() {
-    axios.get('http://localhost:8989/api/study/')
-          .then(res => {
-            this.setState({
-              studies: res.data.results
-            });
-            // console.log(res.data.results)
-            console.log(this.state.studies)
-          })
+    this.props.getStudies();
   }
   render() {
     return (
-      <div>
-        {this.state.studies.map((study, index) => (
-          <p>{study.name}</p>
-        ))}
-      </div>
+      <Fragment>
+        <h1>Studies</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Description</th>
+              <th>DOI</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.props.studies.map(study => (
+              <tr key={study.url}>
+                <td>{study.name}</td>
+                <td>{study.description}</td>
+                <td>{study.doi}</td>
+              </tr>
+            )) }
+          </tbody>
+        </table>
+      </Fragment>
     )
   }
 }
 
-export default Test
+const mapStateToProps = state => ({
+  studies: state.studies.studies
+});
+
+export default connect(mapStateToProps, { getStudies })(Studies);
