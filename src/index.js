@@ -12,8 +12,7 @@ import * as serviceWorker from './serviceWorker';
 // Alert Options
 const alertOptions = {
   position: positions.TOP_CENTER,
-  timeout: 3000,
-  offset: '30px',
+  timeout: 5000,
   transition: transitions.SCALE
 }
 

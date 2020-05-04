@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_STUDIES, DELETE_STUDY, CREATE_STUDY } from './types';
+import { GET_STUDIES, DELETE_STUDY, CREATE_STUDY, GET_ERRORS } from './types';
 
 // GET STUDIES
 export const getStudies = () => dispatch => {
@@ -38,5 +38,15 @@ export const addStudy = (study) => dispatch=> {
         payload: res.data
       });
     })
-    .catch(err => console.log(err));
+    .catch(err => {
+      console.log(err.response.data)
+      const errors = {
+        msg: err.response.data,
+        status: err.response.status
+      }
+      dispatch({
+        type: GET_ERRORS,
+        payload: errors
+      })
+    });
 }
