@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getStudies } from '../redux/actions/studies';
+import { getStudies, deleteStudy } from '../redux/actions/studies';
+import Form from './Form';
 
 export class Studies extends Component {
   state = {
@@ -9,7 +10,9 @@ export class Studies extends Component {
   }
 
   static propTypes = {
-    studies: PropTypes.array.isRequired
+    studies: PropTypes.array.isRequired,
+    getStudies: PropTypes.func.isRequired,
+    deleteStudy: PropTypes.func.isRequired
   }
 
   componentDidMount() {
@@ -18,6 +21,7 @@ export class Studies extends Component {
   render() {
     return (
       <Fragment>
+        <Form />
         <h1>Studies</h1>
         <table>
           <thead>
@@ -29,10 +33,13 @@ export class Studies extends Component {
           </thead>
           <tbody>
             { this.props.studies.map(study => (
-              <tr key={study.url}>
+              <tr key={study.id}>
                 <td>{study.name}</td>
                 <td>{study.description}</td>
                 <td>{study.doi}</td>
+                <td>
+                  <button onClick={this.props.deleteStudy.bind(this, study.id)} style={{color:'red'}}>Delete</button>
+                  </td>
               </tr>
             )) }
           </tbody>
@@ -46,4 +53,4 @@ const mapStateToProps = state => ({
   studies: state.studies.studies
 });
 
-export default connect(mapStateToProps, { getStudies })(Studies);
+export default connect(mapStateToProps, { getStudies, deleteStudy })(Studies);

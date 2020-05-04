@@ -1,18 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Provider as AlertProvider } from 'react-alert';
+import AlertTemplate from 'react-alert-template-basic';
 import { BrowserRouter as Router} from 'react-router-dom';
 import store from './redux/store';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+// Alert Options
+const alertOptions = {
+  timeout: 3000,
+  position: 'top center'
+}
+
 ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
+      <AlertProvider template={AlertTemplate} {...alertOptions}>
+      <Router>
+        <App />
+      </Router>
+    </AlertProvider>
   </Provider>,
   // </React.StrictMode>,
   document.getElementById('root')
