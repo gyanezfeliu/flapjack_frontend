@@ -1,7 +1,7 @@
 import axios from 'axios';
 // I WANT TO CREATE THE MESSAGE IN THE ACTION, NOT IN THE COMPONENT
-import { createMessage } from './messages';
-import { GET_STUDIES, DELETE_STUDY, CREATE_STUDY, GET_ERRORS } from './types';
+import { createMessage, returnErrors } from './messages';
+import { GET_STUDIES, DELETE_STUDY, CREATE_STUDY } from './types';
 
 // GET STUDIES
 export const getStudies = () => dispatch => {
@@ -12,7 +12,7 @@ export const getStudies = () => dispatch => {
         type: GET_STUDIES,
         payload: res.data.results
       });
-    }).catch(err => console.log(err));
+    }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }
 
 // DELETE STUDY
@@ -43,15 +43,5 @@ export const addStudy = (study) => dispatch=> {
         payload: res.data
       });
     })
-    .catch(err => {
-      console.log(err.response.data)
-      const errors = {
-        msg: err.response.data,
-        status: err.response.status
-      }
-      dispatch({
-        type: GET_ERRORS,
-        payload: errors
-      })
-    });
+    .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 }

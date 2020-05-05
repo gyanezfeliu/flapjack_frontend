@@ -21,6 +21,11 @@ export class Form extends Component {
     const { name, description, doi } = this.state;
     const study = { name, description, doi }
     this.props.addStudy(study);
+    this.setState({
+      name: "",
+      description: "",
+      doi: ""
+    })
   }
 
   render() {

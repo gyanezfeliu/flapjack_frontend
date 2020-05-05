@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { transitions, positions, Provider as AlertProvider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
 import { BrowserRouter as Router} from 'react-router-dom';
+// import { HashRouter as Router} from 'react-router-dom';
 import store from './redux/store';
 import './index.css';
 import App from './App';
@@ -20,9 +21,9 @@ ReactDOM.render(
   // <React.StrictMode>
   <Provider store={store}>
       <AlertProvider template={AlertTemplate} {...alertOptions}>
-      <Router>
-        <App />
-      </Router>
+        <Router>
+          <App />
+        </Router>
     </AlertProvider>
   </Provider>,
   // </React.StrictMode>,
