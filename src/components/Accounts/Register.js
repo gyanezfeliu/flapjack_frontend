@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-export class Register extends Component() {
+export class Register extends Component {
 
   state = {
     username: "",
@@ -12,7 +12,7 @@ export class Register extends Component() {
 
   onSubmit = e => {
     e.preventDefault();
-       console.log('submit');
+    console.log('submit');
   }
 
   onChange = e => this.setState({ [e.target.name]: e.target.value})
@@ -28,7 +28,7 @@ export class Register extends Component() {
             <label>Name</label>
             <input
               type="text"
-              name="name"
+              name="username"
               onChange={this.onChange}
               value={username}
             />
