@@ -22,12 +22,22 @@ export class Alerts extends Component {
       if(error.msg.description) {
         alert.error(`Description: ${error.msg.name.join()}`)
       }
+      if(error.msg.message) alert.error(`Message: ${error.msg.message.join()}`)
+      if(error.msg.non_field_errors) {
+        alert.error(error.msg.non_field_errors.join())
+      }
+      if(error.msg.username) {
+        // name is an array, using .join() turns it into a string
+        alert.error(error.msg.username.join())
+      }
     }
 
     // WE'LL CHECK FOR THEM, JUST AS I DID WITH THE ERRORS
     if(message !== prevProps.message) {
       // I USE THE NAME GIVEN IN actions/studies; "studyDeleted"
       if(message.studyDeleted) alert.success(message.studyDeleted);
+      // Passwords not match
+      if(message.passwordNotMatch) alert.error(message.passwordNotMatch);
     }
   }
 
