@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 // Bring logout action
 import { logout } from '../../redux/actions/auth';
+import { Input, Button, Typography } from 'antd';
 
 
 export class Header extends Component {
@@ -18,25 +19,21 @@ export class Header extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
 
-    const authLinks = (
-      <ul>
-        <li>
-          <button onClick={this.props.logout}>
-            Logout
-          </button>
-        </li>
-      </ul>
+    const authLinks = ( 
+      <Button type='primary' htmlType='submit' style={styles.formButton} onClick={this.props.logout}>
+        Logout
+      </Button>
     );
 
     const guestLinks = (
-      <ul>
-        <li>
+      <div>
+        <Button style={styles.formButton}>
           <Link to="/register">Register</Link>
-        </li>
-        <li>
+        </Button>
+        <Button style={styles.formButton}>
           <Link to="/login">Login</Link>
-        </li>
-      </ul>
+        </Button>
+      </div>
     );
 
     return (
@@ -52,14 +49,31 @@ export class Header extends Component {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <Link to="/">Flapjack</Link>
-          </div>
+          </button>
           { isAuthenticated ? authLinks: guestLinks}
         </div>
       </nav>
     );
+  }
+}
+
+const styles = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  formItem: {
+    marginBottom: 15,
+    width: '60%'
+  },
+  formButton: {
+    display: 'flex',
+    width: '30%',
+    align: 'right'
   }
 }
 

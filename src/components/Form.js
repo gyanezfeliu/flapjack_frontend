@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { addStudy } from '../redux/actions/studies';
+import { Input, Button, Typography } from 'antd';
+
 
 export class Form extends Component {
   state = {
@@ -32,43 +34,55 @@ export class Form extends Component {
     const {name, description, doi} = this.state;
     return (
       <div className="card card-body mt-4 mb-4">
-        <h2>Add Study</h2>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              onChange={this.onChange}
-              value={name}
-            />
-          </div>
-          <div>
-            <label>Description</label>
-            <input
-              type="text"
-              name="description"
-              onChange={this.onChange}
-              value={description}
-            />
-          </div>
-          <div>
-            <label>DOI</label>
-            <textarea
-              type="text"
-              name="doi"
-              onChange={this.onChange}
-              value={doi}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </form>
+        <Typography.Title level={2}>
+          Add a study
+        </Typography.Title>
+        <Input
+          style={styles.formItem}
+          name={'name'}
+          type="string"
+          onChange={this.onChange}
+          placeholder="Name"
+          value={name}
+        />
+        <Input
+          style={styles.formItem}
+          name={'description'}
+          type="string"
+          onChange={this.onChange}
+          placeholder="Description"
+          value={description}
+        />
+        <Input
+          style={styles.formItem}
+          name={'doi'}
+          type="string"
+          onChange={this.onChange}
+          placeholder="DOI"
+          value={doi}
+        />
+        <Button type='primary' htmlType='submit' style={styles.formButton} onClick={this.onSubmit}>
+          Add
+        </Button>
       </div>
     )
+  }
+}
+
+const styles = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  formItem: {
+    marginBottom: 15,
+    width: '60%'
+  },
+  formButton: {
+    width: '60%'
   }
 }
 

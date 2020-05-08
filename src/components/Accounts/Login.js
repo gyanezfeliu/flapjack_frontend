@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { login } from '../../redux/actions/auth';
-
+import { Input, Button, Typography } from 'antd';
 
 export class Login extends Component {
 
@@ -30,38 +30,51 @@ export class Login extends Component {
     }
     const { username, password} = this.state
     return (
-      <div className="card card-body mt-4 mb-4">
-        <h2>Login</h2>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Name</label>
-            <input
-              type="text"
-              name="username"
-              onChange={this.onChange}
-              value={username}
-            />
-          </div>
-          <div>
-            <label>Pass</label>
-            <input
-              type="text"
-              name="password"
-              onChange={this.onChange}
-              value={password}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Login
-            </button>
-          </div>
-          <p>
-            Don't have an account? <Link to="/register">Register</Link>
-          </p>
-        </form>
-      </div>
+      <div style={styles.formContainer}>
+      <Typography.Title level={2}>
+        Login to FlapJack
+      </Typography.Title>
+      <Input
+        style={styles.formItem}
+        name={'username'}
+        type="string"
+        onChange={this.onChange}
+        placeholder="Username"
+        value={username}
+      />
+      <Input
+        style={styles.formItem}
+        name={'password'}
+        type="password"
+        onChange={this.onChange}
+        placeholder="Password"
+        value={password}
+      />
+      <Button type='primary' htmlType='submit' style={styles.formButton} onClick={this.onSubmit}>
+        Login
+      </Button>
+      <Typography.Text style={{ marginTop: 20 }}>
+        {'Don\'t have an account? '}<a href='/register'>Register here!</a>
+      </Typography.Text>
+    </div>
     );
+  }
+}
+
+const styles = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  formItem: {
+    marginBottom: 15,
+    width: '60%'
+  },
+  formButton: {
+    width: '60%'
   }
 }
 

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import { register } from '../../redux/actions/auth';
 // I want to make the pass checkings here not in the actions
 import { createMessage } from '../../redux/actions/messages';
+import { Input, Button, Typography } from 'antd'
 
 
 export class Register extends Component {
@@ -45,56 +46,64 @@ export class Register extends Component {
     const { username, email, password, password2} = this.state
 
     return (
-      <div className="card card-body mt-4 mb-4">
-        <h2>Register</h2>
-        <form onSubmit={this.onSubmit}>
-          <div>
-            <label>Name</label>
-            <input
-              type="text"
-              name="username"
-              onChange={this.onChange}
-              value={username}
-            />
-          </div>
-          <div>
-            <label>Email</label>
-            <input
-              type="text"
-              name="email"
-              onChange={this.onChange}
-              value={email}
-            />
-          </div>
-          <div>
-            <label>Pass</label>
-            <textarea
-              type="text"
-              name="password"
-              onChange={this.onChange}
-              value={password}
-            />
-          </div>
-          <div>
-            <label>Pass2</label>
-            <textarea
-              type="text"
-              name="password2"
-              onChange={this.onChange}
-              value={password2}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary">
-              Register
-            </button>
-          </div>
-          <p>
-            Already have an account? <Link to="/login">Login</Link>
-          </p>
-        </form>
+      <div style={styles.formContainer}>
+        <Typography.Title level={2}>
+          Register on FlapJack
+        </Typography.Title>
+        <Input
+          style={styles.formItem}
+          name={'username'}
+          type="string"
+          placeholder="Username"
+          onChange={this.onChange}
+          value={username}
+        />
+        <Input
+          style={styles.formItem}
+          name={'email'}
+          type="email"
+          placeholder="Email"
+          onChange={this.onChange}
+          value={email}
+        />
+        <Input
+          style={styles.formItem}
+          name={'password'}
+          type="password"
+          placeholder="Password"
+          onChange={this.onChange}
+          value={password}
+        />
+        <Input
+          style={styles.formItem}
+          name={'password2'}
+          type="password"
+          placeholder="Password2"
+          onChange={this.onChange}
+          value={password2}
+        />
+        <Button type='primary' htmlType='submit' style={styles.formButton} onClick={this.onSubmit}>
+          Register
+        </Button>
       </div>
-    );
+    )
+  }
+}
+
+const styles = {
+  formContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  formItem: {
+    marginBottom: 15,
+    width: '60%'
+  },
+  formButton: {
+    width: '60%'
   }
 }
 
